@@ -18,6 +18,10 @@ lightcyan='\033[1;36m'
 white='\033[1;37m'
 none='\033[0m'
 
+EMAIL="$1"
+HOSTNAME=$(hostname -f)
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+
 echo ""
 
 #//////////////////////////
@@ -51,3 +55,11 @@ echo ""
 #//////////////////////////
 
 echo -e "[${green}Success${none}] Updates installed."
+
+#//////////////////////////
+
+if [ -z "$1" ]; then
+	echo "Apt updates were run on $HOSTNAME at $TIMESTAMP." | mail -s "Apt Package Updates" "$EMAIL"
+fi
+
+#//////////////////////////
