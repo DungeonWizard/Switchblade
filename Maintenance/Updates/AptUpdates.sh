@@ -36,6 +36,20 @@ echo ""
 
 #//////////////////////////
 
+echo -e "[${green}Retrieving${none}] packages that will be upgraded..."
+
+# Get the list as it appears.
+UPGRADE_LIST=$(apt-get -s upgrade | awk '/^Inst / {print $2}')
+# Get the list as a bullet-separated HTML list.
+UPGRADE_LIST_BULLETS=$(apt-get -s upgrade | awk '/^Inst / {print "<li>" $2 "</li>"}')
+UPGRADE_LIST_HTML="<ul>$UPGRADE_LIST_BULLETS</ul>"
+
+echo -e $UPGRADE_LIST
+
+echo ""
+
+#//////////////////////////
+
 echo -e "[${green}Installing${none}] updates..."
 
 # Perform the updates
@@ -59,7 +73,7 @@ echo -e "[${green}Success${none}] Updates installed."
 
 #//////////////////////////
 
-echo "Package updates were run on <b>$HOSTNAME.$DOMAIN</b> at <b>$TIMESTAMP</b>.<br><i>This is an automated email.</i>" | mail -a "From: $HOSTNAME@$DOMAIN" -a "Content-Type: text/html" -s "📦 Apt Packages Updated: $HOSTNAME.$DOMAIN" "$EMAIL"
+echo "Package updates were run on <b>$HOSTNAME.$DOMAIN</b> at <b>$TIMESTAMP</b>. This affected the following packages:<br>$UPGRADE_LIST_HTML<br><br><i>This is an automated email.</i>" | mail -a "From: $HOSTNAME@$DOMAIN" -a "Content-Type: text/html" -s "📦 Apt Packages Updated: $HOSTNAME.$DOMAIN" "$EMAIL"
 echo -e "[${green}Success${none}] Notified [${yellow}$EMAIL${none}]"
 
 #//////////////////////////
