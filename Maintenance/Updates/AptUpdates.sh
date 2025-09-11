@@ -20,7 +20,7 @@ none='\033[0m'
 
 EMAIL="$1"
 HOSTNAME=$(hostname -f)
-TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+TIMESTAMP=$(date '%H:%M:%S')
 
 echo ""
 
@@ -59,7 +59,7 @@ echo -e "[${green}Success${none}] Updates installed."
 #//////////////////////////
 
 if [ -z "$1" ]; then
-	echo "Apt updates were run on $HOSTNAME at $TIMESTAMP." | mail -s "Apt Package Updates" "$EMAIL"
+	echo "Package updates were run on <b>$HOSTNAME</b> at <b>$TIMESTAMP</b>." | mail -a "Content-Type: text/html" -s "📦 Apt Packages Updated: $HOSTNAME" "$EMAIL"
 fi
 
 #//////////////////////////
