@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# Pretty colors.
+red='\033[0;31m'
+green='\033[0;32m'
+orange='\033[0;33m'
+blue='\033[0;34m'
+purple='\033[0;35m'
+cyan='\033[0;36m'
+lightgray='\033[0;37m'
+darkgray='\033[1;30m'
+lightred='\033[1;31m'
+lightgreen='\033[1;32m'
+yellow='\033[1;33m'
+lightblue='\033[1;34m'
+lightpurple='\033[1;35m'
+lightcyan='\033[1;36m'
+white='\033[1;37m'
+none='\033[0m'
+
+DOMAIN="example.com"
+EMAIL="test@example.com"
+HOSTNAME=$(hostname -f)
+TIMESTAMP=$(date '+%H:%M:%S')
+
+echo ""
+
+#//////////////////////////
+
+echo -e "[${green}Retrieving${none}] updates..."
+
+# Fetch the updates
+sudo apt-get update
+
+echo ""
+
+#//////////////////////////
+
+echo -e "[${green}Installing${none}] updates..."
+
+# Perform the updates
+sudo apt-get upgrade -y
+
+echo ""
+
+#//////////////////////////
+
+echo -e "[${green}Cleaning up${none}] after updates..."
+
+# Clean up
+sudo apt-get autoclean
+sudo apt-get autoremove -y
+
+echo ""
+
+#//////////////////////////
+
+echo -e "[${green}Success${none}] Updates installed."
+
+echo ""
+
+#//////////////////////////
+
+echo -e "[${green}Installing${none}] distribution updates..."
+
+sudo apt dist-upgrade -y
+
+echo ""
+
+#//////////////////////////
+
+echo -e "[${green}Success${none}] Distribution updates installed. Please reboot the machine and then run ${yellow}sudo do-release-upgrade${none} to upgrade the operating system."
+
+#//////////////////////////
