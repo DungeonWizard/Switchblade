@@ -18,7 +18,8 @@ lightcyan='\033[1;36m'
 white='\033[1;37m'
 none='\033[0m'
 
-EMAIL="$1"
+DOMAIN="example.com"
+EMAIL="test@example.com"
 HOSTNAME=$(hostname -f)
 TIMESTAMP=$(date '+%H:%M:%S')
 
@@ -59,8 +60,8 @@ echo -e "[${green}Success${none}] Updates installed."
 #//////////////////////////
 
 if [ -z "$1" ]; then
-	echo "Package updates were run on <b>$HOSTNAME</b> at <b>$TIMESTAMP</b>." | mail -a "Content-Type: text/html" -s "📦 Apt Packages Updated: $HOSTNAME" "$EMAIL"
-	echo -e "[${green}Success${none}] [${yellow}$EMAIL${none}] was notified."
+	echo "Package updates were run on <b>$HOSTNAME.$DOMAIN</b> at <b>$TIMESTAMP</b>." | mail -a "From: $HOSTNAME@$DOMAIN" -a "Content-Type: text/html" -s "📦 Apt Packages Updated: $HOSTNAME.$DOMAIN" "$EMAIL"
+	echo -e "[${green}Success${none}] Notified [${yellow}$EMAIL${none}]"
 fi
 
 #//////////////////////////
