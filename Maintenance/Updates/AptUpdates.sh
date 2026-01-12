@@ -73,7 +73,8 @@ echo -e "[${green}Success${none}] Updates installed."
 
 #//////////////////////////
 
-echo "Package updates were run on <b>$HOSTNAME.$DOMAIN</b> at <b>$TIMESTAMP</b>. This affected the following packages:<br>$UPGRADE_LIST_HTML<br><i>This is an automated email.</i>" | mail -a "From: $HOSTNAME@$DOMAIN" -a "Content-Type: text/html" -s "📦 Apt Packages Updated: $HOSTNAME.$DOMAIN" "$EMAIL"
-echo -e "[${green}Success${none}] Notified [${yellow}$EMAIL${none}]"
+# Uncomment if you want package update alerts.
+# echo "Package updates were run on <b>$HOSTNAME.$DOMAIN</b> at <b>$TIMESTAMP</b>. This affected the following packages:<br>$UPGRADE_LIST_HTML<br><i>This is an automated email.</i>" | mail -a "From: $HOSTNAME@$DOMAIN" -a "Content-Type: text/html" -s "📦 Apt Packages Updated: $HOSTNAME.$DOMAIN" "$EMAIL"
+# echo -e "[${green}Success${none}] Notified [${yellow}$EMAIL${none}]"
 
 #//////////////////////////
